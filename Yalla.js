@@ -1,201 +1,131 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const scrollToTopButton = document.getElementById('scrollToTop');
     const welcome = document.getElementById("welcomeText");
-    
+    const analysisLink = document.querySelector('a[href="#Analysis"]');
+    const analysisModal = document.getElementById('analysisModal');
+    const yearSelect = document.getElementById('yearSelect');
+    const makeSelect = document.getElementById('makeSelect');
+    const modelSelect = document.getElementById('modelSelect');
+    const typeSelect = document.querySelector('select[name="type"]');
 
-    // Scroll event for showing the button and controlling z-index
-    window.addEventListener('scroll', function () {
-        const scrollY = window.scrollY;
-
-        if (scrollY > 100) {
-            document.body.classList.add('scrolled');
-            scrollToTopButton.classList.add('show');
-            scrollToTopButton.classList.remove('hide');
-        } else {
-            document.body.classList.remove('scrolled');
-            scrollToTopButton.classList.add('hide');
-            setTimeout(() => {
-                scrollToTopButton.classList.remove('show');
-            }, 300);
-        }
-
-        // Keeps it above the video
+    // Scroll behavior
+    window.addEventListener('scroll', () => {
+        const isScrolled = window.scrollY > 100;
+        document.body.classList.toggle('scrolled', isScrolled);
+        scrollToTopButton.classList.toggle('show', isScrolled);
+        scrollToTopButton.classList.toggle('hide', !isScrolled);
         scrollToTopButton.style.zIndex = '9999';
+
+        if (!isScrolled) {
+            setTimeout(() => scrollToTopButton.classList.remove('show'), 300);
+        }
     });
 
-    // Smooth scroll to top
-    scrollToTopButton.addEventListener('click', function () {
+    // Scroll to top
+    scrollToTopButton.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ✅ Fade out welcome text after 3 seconds
-    setTimeout(() => {
-        if (welcome) {
+    // Fade out welcome text
+    if (welcome) {
+        setTimeout(() => {
             welcome.classList.add("fade-out");
-            setTimeout(() => {
-                welcome.style.display = "none";
-            }, 1000); // after fade
-        }
-    }, 3000);
-
-    // Scroll to #Analysis section and then open modal
-const analysisLink = document.querySelector('a[href="#Analysis"]');
-if (analysisLink) {
-    analysisLink.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const targetSection = document.getElementById('Analysis');
-        if (targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth' });
-
-            // Delay to allow scroll before showing modal
-            setTimeout(() => {
-                document.getElementById('analysisModal').style.display = 'flex';
-            }, 1000); // Adjust timing if scroll is slower/faster
-        }
-    });
-}
-
-
-    // Close modal function
-    function closeAnalysisModal() {
-        document.getElementById('analysisModal').style.display = 'none';
+            setTimeout(() => (welcome.style.display = "none"), 1000);
+        }, 3000);
     }
 
-    // Optional: close when clicking outside the form
-    window.addEventListener('click', function (e) {
-        const modal = document.getElementById('analysisModal');
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-
-
-
-
-
-
-
-
-
-
- // Get the select elements
- const yearSelect = document.getElementById('yearSelect');
- const makeSelect = document.getElementById('makeSelect');
- const modelSelect = document.getElementById('modelSelect');
-
- const typeSelect = document.querySelector('select[name="type"]');
-
-
-
- // Populate Year Dropdown (1980-current year)
- const currentYear = new Date().getFullYear();
- yearSelect.innerHTML = '<option value="">Select Year</option>';
- for (let year = currentYear; year >= 1900; year--) {
-     const option = document.createElement("option");
-     option.value = year;
-     option.textContent = year;
-     yearSelect.appendChild(option);
- }
-
-
-
-
-// Function to load makes
-async function loadMakesForYear(year) {
-    try {
-        const selectedType = typeSelect.value || "car"; // default to car
-        const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/${selectedType}?format=json`);
-                const data = await res.json();
-        // ✅ Sort the make names alphabetically here
-            data.Results.sort((a, b) => a.MakeName.localeCompare(b.MakeName));
-
-        makeSelect.innerHTML = '<option value="">Select Make</option>';
-        data.Results.forEach(make => {
-            const option = document.createElement("option");
-            option.value = make.MakeName;
-            option.textContent = make.MakeName;
-            makeSelect.appendChild(option);
+    // Smooth scroll to Analysis section and show modal
+    if (analysisLink) {
+        analysisLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetSection = document.getElementById('Analysis');
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => (analysisModal.style.display = 'flex'), 1000);
+            }
         });
-        makeSelect.disabled = false;
-    } catch (err) {
-        makeSelect.innerHTML = '<option>Error loading makes</option>';
-        console.error(err);
     }
-}
 
-// Bind to year selection
-yearSelect.addEventListener("change", () => {
-    const selectedYear = yearSelect.value;
-    if (selectedYear) {
-        makeSelect.innerHTML = '<option value="">Loading...</option>';
-        makeSelect.disabled = true;
-        modelSelect.innerHTML = '<option value="">Select Model</option>';
-        modelSelect.disabled = true;
-        loadMakesForYear(selectedYear);
+    // Close modal on outside click or Escape key
+    window.addEventListener('click', (e) => {
+        if (e.target === analysisModal) analysisModal.style.display = 'none';
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") analysisModal.style.display = 'none';
+    });
+
+    // Populate Year dropdown
+    const currentYear = new Date().getFullYear();
+    yearSelect.innerHTML = '<option value="">Select Year</option>';
+    for (let y = currentYear; y >= 1900; y--) {
+        yearSelect.insertAdjacentHTML('beforeend', `<option value="${y}">${y}</option>`);
     }
-});
 
-typeSelect.addEventListener("change", () => {
-    const selectedYear = yearSelect.value;
-    if (selectedYear) {
-        loadMakesForYear(selectedYear);
+    // Load makes for a selected year and type
+    async function loadMakesForYear(year) {
+        try {
+            const type = typeSelect.value || "car";
+            const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/${type}?format=json`);
+            const { Results } = await res.json();
+
+            makeSelect.innerHTML = '<option value="">Select Make</option>';
+            Results.sort((a, b) => a.MakeName.localeCompare(b.MakeName)).forEach(({ MakeName }) => {
+                makeSelect.insertAdjacentHTML('beforeend', `<option value="${MakeName}">${MakeName}</option>`);
+            });
+
+            makeSelect.disabled = false;
+        } catch (err) {
+            console.error(err);
+            makeSelect.innerHTML = '<option>Error loading makes</option>';
+        }
     }
-});
 
+    // Load models for selected make and year
+    async function loadModels(make, year) {
+        try {
+            const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${encodeURIComponent(make)}/modelyear/${year}?format=json`);
+            const { Results } = await res.json();
 
+            modelSelect.innerHTML = '<option value="">Select Model</option>';
+            if (Results.length) {
+                Results.sort((a, b) => a.Model_Name.localeCompare(b.Model_Name)).forEach(({ Model_Name }) => {
+                    modelSelect.insertAdjacentHTML('beforeend', `<option value="${Model_Name}">${Model_Name}</option>`);
+                });
+            } else {
+                modelSelect.innerHTML = '<option value="">No models found</option>';
+            }
 
-
-
-
-
- // Fetch models when make is selected
- makeSelect.addEventListener("change", async function() {
-     const make = this.value;
-     const year = yearSelect.value;
-
-     if (!make || !year) return;
-
-     modelSelect.innerHTML = '<option value="">Loading...</option>';
-     modelSelect.disabled = true;
-
-     try {
-         const response = await fetch(
-             `https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${encodeURIComponent(make)}/modelyear/${year}?format=json`
-         );
-         const data = await response.json();
-         
-         // ✅ Sort the model names alphabetically here
-            data.Results.sort((a, b) => a.Model_Name.localeCompare(b.Model_Name));
-
-         modelSelect.innerHTML = '<option value="">Select Model</option>';
-         if (data.Results && data.Results.length > 0) {
-             data.Results.forEach(model => {
-                 const option = document.createElement("option");
-                 option.value = model.Model_Name;
-                 option.textContent = model.Model_Name;
-                 modelSelect.appendChild(option);
-             });
-         } else {
-             modelSelect.innerHTML = '<option value="">No models found</option>';
-         }
-         modelSelect.disabled = false;
-     } catch (error) {
-         console.error('Error fetching models:', error);
-         modelSelect.innerHTML = '<option value="">Error loading models</option>';
-     }
- });
-
-
-
- document.addEventListener('keydown', function(e) {
-    if (e.key === "Escape") {
-        document.getElementById('analysisModal').style.display = 'none';
+            modelSelect.disabled = false;
+        } catch (err) {
+            console.error('Error fetching models:', err);
+            modelSelect.innerHTML = '<option>Error loading models</option>';
+        }
     }
-});
 
+    // Event Listeners for dropdowns
+    yearSelect.addEventListener("change", () => {
+        const year = yearSelect.value;
+        if (year) {
+            makeSelect.innerHTML = '<option>Loading...</option>';
+            modelSelect.innerHTML = '<option value="">Select Model</option>';
+            makeSelect.disabled = true;
+            modelSelect.disabled = true;
+            loadMakesForYear(year);
+        }
+    });
 
+    typeSelect.addEventListener("change", () => {
+        if (yearSelect.value) loadMakesForYear(yearSelect.value);
+    });
 
-
+    makeSelect.addEventListener("change", () => {
+        const make = makeSelect.value;
+        const year = yearSelect.value;
+        if (make && year) {
+            modelSelect.innerHTML = '<option>Loading...</option>';
+            modelSelect.disabled = true;
+            loadModels(make, year);
+        }
+    });
 });
