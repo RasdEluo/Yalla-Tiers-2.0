@@ -1,0 +1,599 @@
+body,
+html {
+    margin: 0;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+.main {
+    position: relative;
+
+}
+
+.main .content {
+    height: 100vh;
+    position: relative;
+    background-image: url('ant-rozetsky-SLIFI67jv5k-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    /* optional dark translucent background */
+    padding: 20px 0;
+}
+
+
+
+
+
+
+.navbar .menu {
+    margin: 50px;
+    padding: 0;
+}
+
+.navbar .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    /* Align menu items horizontally */
+    flex-direction: row;
+    /* Keep menu items in a row */
+    align-items: center;
+    /* Center the menu items */
+
+}
+
+.navbar .menu ul li {
+    margin: 0 20px;
+    /* Space between menu items (adjust the 20px for more or less spacing) */
+}
+
+.navbar .menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.9em;
+    border-radius: 5px;
+    /* Rounded corners for a more polished look */
+    border: 2px solid #fff;
+    /* White border around the logo */
+    padding: 5px;
+    font-weight: bold;
+    /* Make the font bold for impact */
+    cursor: crosshair;
+    /* Racing-style targeting cursor */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Darker background on hover */
+    display: inline-block;
+    /* Ensures proper scaling */
+    transition: transform 0.3s ease-in-out;
+    /* Smooth transition */
+    transform-origin: center;
+    /* Ensures smooth scaling */
+
+
+}
+
+
+.navbar .menu ul li a:hover {
+    color: #ff5733;
+    /* Change logo color on hover */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Darker background on hover */
+    transform: scale(1.2);
+    /* Scale slightly instead of doubling */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+    /* Enhance the shadow effect on hover */
+
+}
+
+.navbar .icon h2 {
+    color: #fff;
+    /* White text color */
+    margin: 0;
+    padding: 5px;
+    font-size: 3em;
+    /* Bigger font size for better visibility */
+    font-family: 'Arial', sans-serif;
+    /* Clean and modern font family */
+    font-weight: bold;
+    /* Make the font bold for impact */
+    letter-spacing: 2px;
+    /* Add some space between letters for a sleek effect */
+    text-transform: uppercase;
+    /* Transform text to uppercase */
+    border: 2px solid #fff;
+    /* White border around the logo */
+    border-radius: 5px;
+    /* Rounded corners for a more polished look */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Slight transparent background for contrast */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    /* Drop shadow for depth */
+    transition: all 0.3s ease;
+    /* Smooth transition for hover effect */
+    cursor: crosshair;
+    /* Racing-style targeting cursor */
+}
+
+
+.navbar .icon h2:hover {
+    color: #ff5733;
+    /* Change logo color on hover */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Darker background on hover */
+    transform: scale(1.05);
+    /* Slightly scale up the logo when hovered */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+    /* Enhance the shadow effect on hover */
+}
+
+/* Media Query for Tablet Screens */
+@media screen and (max-width: 768px) {
+    .navbar .icon h2 {
+        font-size: 8vw;
+        /* Larger font size for tablets */
+        padding: 8px 16px;
+        /* Adjust padding for smaller screens */
+    }
+}
+
+/* Media Query for Mobile Screens */
+@media screen and (max-width: 480px) {
+    .navbar .icon h2 {
+        font-size: 10vw;
+        /* Even larger font size for mobile screens */
+        padding: 6px 12px;
+        /* Adjust padding for smaller screens */
+        border-width: 1px;
+        /* Thinner border for mobile */
+    }
+}
+
+.navbar .icon a {
+    text-decoration: none;
+    /* Remove underline from the link */
+}
+
+
+
+/* "YALLA TIERS" floating button */
+.scroll-to-top {
+    font-family: 'Anton', sans-serif;
+    position: fixed;
+    right: 20px;
+    /* Place it on the right side */
+    bottom: 40px;
+    /* Adjust the vertical position */
+    background-color: #FFD700;
+    color: black;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    /* Hidden by default */
+    transition: transform 0.3s ease;
+    /* Smooth transition for hover effect */
+    z-index: 9999;
+}
+
+/* When the button should be visible */
+.scroll-to-top.show {
+    display: block;
+    /* Make the button visible */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* When the button is hidden */
+.scroll-to-top.hide {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+
+
+/* Show the "YALLA TIERS" button when scrolling down */
+body.scrolled .scroll-to-top {
+    display: block;
+}
+
+/* Hover effect */
+.scroll-to-top:hover {
+    transform: scale(1.1);
+    /* Slightly enlarge when hovered */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    /* Add shadow on hover */
+}
+
+
+/* Content styling */
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('ant-rozetsky-SLIFI67jv5k-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.home-container {
+    text-align: center;
+    color: white;
+}
+
+.home-container h1 {
+    font-size: 3em;
+}
+
+.home-content p {
+    font-size: 1.5em;
+}
+
+
+
+/* Video Container */
+.video-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* Adjust height of the video */
+    background-color: black;
+    /* Set a background in case video fails to load */
+    text-align: center;
+}
+
+/* Video styling */
+.car-oil-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensure the video fills the container */
+}
+
+
+
+#Analysis{
+    min-height: 100vh;
+    background-image: url('panoramic-industrial-silhouette-oil-industry-factory-buildings-refinery-complex-with-pipes-and-tanks-landscape-background-illustration-vector.WebP');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px;
+    color: white;
+
+
+}
+
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+} 
+
+
+
+
+.analysis-modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px); /* nice soft background blur */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .modal-content {
+    background: #ffffff;
+    padding: 40px; /* wider padding */
+    border-radius: 12px;
+    max-width: 700px; /* wider width */
+    width: 90%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: left;
+  }
+  
+  /* Headline */
+  .modal-content h2 {
+    margin-top: 0;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Form Fields */
+  .modal-content form label {
+    display: block;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  .modal-content form input,
+  .modal-content form select{
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+  
+  /* ✅ Analyze Now Button */
+  .modal-content form button[type="submit"] {
+    margin-top: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-family: 'Lobster', cursive; /* Use your preferred font here */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .modal-content form button[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+
+
+
+
+
+
+  
+  /* ✅ Red Close Button - centered */
+  button.close-modal {
+    display: block;
+    margin: 30px auto 0 auto;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button.close-modal:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+  }
+  
+  
+
+  #background-section {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: dark tint for readability */
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .search-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .search-container input {
+    width: 80%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  
+  .search-container button {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #00bcd4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-container button:hover {
+    background-color: #0097a7;
+  }
+  
+
+
+
+
+/* Container for the search box to position it absolutely */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('your-background-image.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.search-overlay {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  max-width: 500px;
+  padding: 30px 40px;
+  margin: 130px auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  color: #222;
+  background-size: contain; /* shows the whole image */
+
+}
+
+.search-box {
+  background-color: rgba(0, 0, 0, 0.6); /* dark translucent background */
+  color: #fff; /* white text for contrast */
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+
+
+
+
+.search-overlay h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.search-overlay input[type="text"] {
+  width: calc(100% - 90px);
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.search-overlay button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.search-overlay button:hover {
+  background-color: #0056b3;
+}
+
+.result-section {
+  margin-top: 30px;
+}
+
+.result-section h3 {
+  margin-bottom: 5px;
+}
+
+.health-bar {
+  height: 12px;
+  width: 100%;
+  background: linear-gradient(to right, red 0%, yellow 40%, green 70%);
+  border-radius: 10px;
+  margin: 10px 0;
+}
+.search-overlay {
+    position: absolute;
+    top: 30%; /* adjust based on where you want it */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; 
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px); /* Optional: blurry glass effect */
+  }
+  
+  /* Style for the input */
+  .search-overlay input[type="text"] {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    width: 300px;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  /* Style for the button */
+  .search-overlay button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 25px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+
+  .search-overlay button:hover {
+    background-color: #e6c200;
+}
+
+/* Scrollbar for Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 12px;
+    /* Width of the scrollbar */
+}
+
+/* Track (background behind the scrollbar) */
+::-webkit-scrollbar-track {
+    background: black;
+    /* Black background */
+    border-radius: 0;
+    margin: 0;
+    background-clip: padding-box;
+    /* Prevents white space */
+    border: solid 2px black;
+}
+
+/* Handle (the moving part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, gold 25%, black 25%, black 50%, gold 50%, gold 75%, black 75%);
+    background-size: 20px 20px;
+    /* Creates the checkered pattern */
+    border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: gold;
+    /* Solid gold when hovered */
+}
+
