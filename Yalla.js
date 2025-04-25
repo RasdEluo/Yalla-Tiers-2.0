@@ -3,10 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const welcome = document.getElementById("welcomeText");
     const analysisLink = document.querySelector('a[href="#Analysis"]');
     const analysisModal = document.getElementById('analysisModal');
-    const yearSelect = document.getElementById('yearSelect');
-    const makeSelect = document.getElementById('makeSelect');
-    const modelSelect = document.getElementById('modelSelect');
-    const typeSelect = document.querySelector('select[name="type"]');
 
     // Scroll behavior
     window.addEventListener('scroll', () => {
@@ -164,6 +160,86 @@ document.getElementById('partSearchBtn').addEventListener('click', async () => {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const yearSelect = document.getElementById('yearSelect');
+    const makeSelect = document.getElementById('makeSelect');
+    const modelSelect = document.getElementById('modelSelect');
+    const typeSelect = document.querySelector('select[name="type"]');
+
+    // Populate Year Dropdown
+    const currentYear = new Date().getFullYear();
+    yearSelect.innerHTML = '<option value="">Select Year</option>';
+    for (let y = currentYear; y >= 1900; y--) {
+        yearSelect.insertAdjacentHTML('beforeend', `<option value="${y}">${y}</option>`);
+    }
+
+    // Load makes for a selected year and type
+    async function loadMakesForYear(year) {
+        try {
+            const type = typeSelect.value || "car";  // Default to 'car'
+            const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/${type}?format=json`);
+            const { Results } = await res.json();
+
+            makeSelect.innerHTML = '<option value="">Select Make</option>';
+            Results.sort((a, b) => a.MakeName.localeCompare(b.MakeName)).forEach(({ MakeName }) => {
+                makeSelect.insertAdjacentHTML('beforeend', `<option value="${MakeName}">${MakeName}</option>`);
+            });
+
+            makeSelect.disabled = false;
+        } catch (err) {
+            console.error("Error loading makes:", err);
+            makeSelect.innerHTML = '<option>Error loading makes</option>';
+        }
+    }
+
+    // Load models for selected make and year
+    async function loadModels(make, year) {
+        try {
+            const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeYear/make/${encodeURIComponent(make)}/modelyear/${year}?format=json`);
+            const { Results } = await res.json();
+
+            modelSelect.innerHTML = '<option value="">Select Model</option>';
+            if (Results.length) {
+                Results.sort((a, b) => a.Model_Name.localeCompare(b.Model_Name)).forEach(({ Model_Name }) => {
+                    modelSelect.insertAdjacentHTML('beforeend', `<option value="${Model_Name}">${Model_Name}</option>`);
+                });
+            } else {
+                modelSelect.innerHTML = '<option value="">No models found</option>';
+            }
+
+            modelSelect.disabled = false;
+        } catch (err) {
+            console.error('Error fetching models:', err);
+            modelSelect.innerHTML = '<option>Error loading models</option>';
+        }
+    }
+
+    // Event Listeners for dropdowns
+    yearSelect.addEventListener("change", () => {
+        const year = yearSelect.value;
+        if (year) {
+            makeSelect.innerHTML = '<option>Loading...</option>';
+            modelSelect.innerHTML = '<option value="">Select Model</option>';
+            makeSelect.disabled = true;
+            modelSelect.disabled = true;
+            loadMakesForYear(year);
+        }
+    });
+
+    typeSelect.addEventListener("change", () => {
+        if (yearSelect.value) loadMakesForYear(yearSelect.value);
+    });
+
+    makeSelect.addEventListener("change", () => {
+        const make = makeSelect.value;
+        const year = yearSelect.value;
+        if (make && year) {
+            modelSelect.innerHTML = '<option>Loading...</option>';
+            modelSelect.disabled = true;
+            loadModels(make, year);
+        }
+    });
+});
 
 
 
