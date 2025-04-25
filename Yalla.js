@@ -142,6 +142,24 @@ const response = await fetch("https://your-vercel-project.vercel.app/api/ai", {
 
 
 
+document.getElementById('partSearchBtn').addEventListener('click', async () => {
+  const input = document.getElementById('partSearchInput').value.trim();
+  if (!input) return alert("Enter a part name.");
+
+  const response = await fetch('https://yalla-tiers-2-0.vercel.app/api/ai', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: `Give me info and suggestions for a "${input}"` })
+  });
+
+  const result = await response.json();
+  const content = result.choices?.[0]?.message?.content || "No data returned.";
+
+  document.querySelector('.result-section').innerHTML = `
+    <h3>${input}</h3>
+    <p>${content}</p>
+  `;
+});
 
 
 
