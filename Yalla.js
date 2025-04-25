@@ -128,4 +128,36 @@ document.addEventListener("DOMContentLoaded", () => {
             loadModels(make, year);
         }
     });
+
+
+
+
+
+const response = await fetch("https://your-vercel-project.vercel.app/api/ai", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ prompt: userPrompt })
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 });
