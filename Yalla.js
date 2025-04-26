@@ -244,6 +244,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+fetch('https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  });
 
 
 
