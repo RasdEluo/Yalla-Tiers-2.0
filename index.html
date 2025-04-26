@@ -2,182 +2,242 @@
 <html lang="en">
 
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Yalla Tiers – Your smart vehicle analysis tool for cars, bikes, boats, and more.">
-    <meta name="keywords" content="Yalla Tiers, car analyzer, vehicle parts, auto health check, car tools">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Your Name">
+    <meta name="viewport" content="Width=device-width, initial-scale=1.0">
     <title>Yalla Tiers</title>
     <link rel="stylesheet" href="Yalla.css">
-    <link rel="icon" href="iconimg.jpg" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
+
 
 <body>
     <div class="main">
 
-        <!-- Navbar & Welcome -->
-        <header class="content" id="home">
-            <nav class="navbar">
+        <!-- Section 1: Hero background -->
+        <div id="home" class="content">
+
+            <div class="navbar">
                 <div class="icon">
-                    <h2 id="logo" class="logo">Yalla Tiers</h2>
+                    <a><h2 id="logo" class="logo">Yalla Tiers</h2></a>
                 </div>
-                <ul class="menu">
-                    <li><a href="#Analysis">Analysis</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="home-container">
-                <div class="home-content">
-                    <h1 id="welcomeText">Welcome</h1>
-                    <p class="home-text"></p>
-                </div>
-            </div>
-        </header>
-
-        <!-- Background Video -->
-        <section class="video-container" id="videoContainer">
-            <video id="carOilVideo" class="car-oil-video" autoplay loop muted playsinline preload="auto">
-                <source src="Liquid_Gold.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </section>
-
-        <!-- Vehicle Analysis Section -->
-        <section id="Analysis">
-            <div class="search-overlay">
-                <h2>Vehicle Analysis</h2>
-
-                <div class="searchbar-wrapper">
-                    <input type="text" id="partSearchInput" placeholder="Enter part (e.g. brake pad)" />
-                    <button id="partSearchBtn">Search</button>
-                </div>
-
-                <div class="result-section">
-                    <h3>Brake Pad</h3>
-                    <p>Brake pads are components of the braking system that apply friction to the brake rotors to help slow down or stop the vehicle.</p>
-
-                    <h4>Condition</h4>
-                    <div class="health-bar"></div>
-
-                    <h4>Suggestions</h4>
-                    <p>Brake rotors</p>
-
-                    <h4>Purchase Links</h4>
+                <div class="menu">
                     <ul>
-                        <li><a href="https://www.amazon.com" target="_blank">Amazon</a></li>
-                        <li><a href="https://www.ebay.com" target="_blank">eBay</a></li>
+                        <li><a href="#Analysis">Analysis</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
-        </section>
 
-        <!-- Contact Section -->
-        <section id="contact">
-            <!-- Contact form or info goes here -->
-        </section>
-
-        <!-- Scroll To Top -->
-        <div class="scroll-to-top" id="scrollToTop">YALLA TIERS</div>
-
-        <!-- Analysis Modal -->
-        <div class="analysis-modal" id="analysisModal">
-            <div class="modal-content">
-                <h2>Vehicle Analysis</h2>
-                <form id="analysisForm">
-                    <label>Type:</label>
-                    <select name="type" required>
-                        <option value="">Select</option>
-                        <option value="car">Car</option>
-                        <option value="truck">Truck</option>
-                        <option value="motorcycle">Motorcycle</option>
-                    </select>
-
-                    <label>Year:</label>
-                    <select name="year" id="yearSelect" required></select>
-
-                    <label>Make:</label>
-                    <select name="make" id="makeSelect" required>
-                        <option value="">Select</option>
-                    </select>
-
-                    <label>Model:</label>
-                    <select name="model" id="modelSelect" required>
-                        <option value="">Select</option>
-                    </select>
-
-                    <label>Mileage / Hours:</label>
-                    <input type="text" name="mileage" id="mileageInput" placeholder="e.g. 90 000" required>
-
-                    <button type="submit">Analyze Now</button>
-                </form>
-
-                <button class="close-modal" onclick="closeAnalysisModal()">Close</button>
+            <div class="home-container">
+                <div class="home-content">
+                    <h1 id ="welcomeText">Welcome</h1>
+                    <p class="home-text"></p>
+                </div>
             </div>
         </div>
 
+        <!-- Section 2: Fullscreen video -->
+        <div class="video-container" id="videoContainer">
+            <video id="carOilVideo" class="car-oil-video" autoplay loop muted playsinline>
+                <source src="Liquid_Gold.mp4" type="video/mp4">
+                <video id="carOilVideo" class="car-oil-video" autoplay loop muted playsinline preload="auto">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+
+
+
+
+
+
+        <meta name="description" content="Yalla Tiers – Your smart vehicle analysis tool for cars, bikes, boats, and more.">
+        <meta name="keywords" content="Yalla Tiers, car analyzer, vehicle parts, auto health check, car tools">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="Your Name">
+        
+
+
+
+
+
+
+
+
+
+        <!-- Section 3: Industrial Background -->
+<section id="Analysis" style="position: relative;">
+    <div class="search-overlay">
+        <h2>Vehicle Analysis</h2>
+        <div class="searchbar-wrapper">
+    <input type="text" id="partSearchInput" placeholder="Enter part (e.g. brake pad)" />
+    <button id="partSearchBtn">Search</button>
+</div>
+
+
+    
+        <div class="result-section">
+            <h3>Brake Pad</h3>
+            <p>Brake pads are components of the braking system that apply friction to the brake rotors to help slow down or stop the vehicle.</p>
+    
+            <h4>Condition</h4>
+            <div class="health-bar"></div>
+    
+            <h4>Suggestions</h4>
+            <p>Brake rotors</p>
+    
+            <h4>Purchase Links</h4>
+            <ul>
+                <li><a href="https://www.amazon.com" target="_blank">Amazon</a></li>
+                <li><a href="https://www.ebay.com" target="_blank">eBay</a></li>
+            </ul>
+        </div>
+    </div>
+    
+
+
+        <!-- Section 4: Contact -->
+        <section id="contact">
+            
+        </section>
+
     </div>
 
-    <!-- Scripts -->
-    <script>
-        function closeAnalysisModal() {
-            document.getElementById('analysisModal').style.display = 'none';
-        }
+    <!-- Floating scroll button -->
+    <div class="scroll-to-top" id="scrollToTop">YALLA TIERS</div>
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const scrollToTopButton = document.getElementById('scrollToTop');
-            const welcome = document.getElementById("welcomeText");
 
-            // Scroll event
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 100) {
-                    document.body.classList.add('scrolled');
-                    scrollToTopButton.classList.add('show');
-                    scrollToTopButton.classList.remove('hide');
-                } else {
-                    document.body.classList.remove('scrolled');
-                    scrollToTopButton.classList.add('hide');
-                    setTimeout(() => {
-                        scrollToTopButton.classList.remove('show');
-                    }, 300);
-                }
-                scrollToTopButton.style.zIndex = '9999';
-            });
 
-            scrollToTopButton.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+<!-- 🚀 Analysis Modal HTML goes here -->
+<div class="analysis-modal" id="analysisModal">
+    <div class="modal-content">
+      <h2>Vehicle Analysis</h2>
+      <form id="analysisForm">
+        
+        <label>Type:</label>
+        <select name="type" required>
+          <option value="">Select</option>
+          <option value="car">Car</option>
+          <option value="truck">Truck</option>
+          <option value="motorcycle">Motorcycle</option>
+        </select>
+  
+        <label>Year:</label>
+        <select name="year" id="yearSelect" required></select>
+  
+        <label>Make:</label>
+        <select name="make" id="makeSelect" required>
+          <option value="">Select</option>
+        </select>
+  
+        <label>Model:</label>
+        <select name="model" id="modelSelect" required>
+          <option value="">Select</option>
+        </select>
+  
+        <label>Mileage / Hours:</label>
+        <input type="text" name="mileage" id="mileageInput" placeholder="e.g. 90 000" required>
+  
+        <button type="submit">Analyze Now</button>
+      </form>
+  
+      <button class="close-modal" onclick="closeAnalysisModal()">Close</button>
+    </div>
+  </div>
+  
 
-            // Welcome fade out
-            setTimeout(() => {
-                if (welcome) {
-                    welcome.classList.add("fade-out");
-                    setTimeout(() => welcome.style.display = "none", 1000);
-                }
-            }, 3000);
+  
 
-            // Open modal on nav link click
-            const analysisLink = document.querySelector('a[href="#Analysis"]');
-            if (analysisLink) {
-                analysisLink.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.getElementById('analysisModal').style.display = 'flex';
-                });
+
+
+  <script>
+    function closeAnalysisModal() {
+        document.getElementById('analysisModal').style.display = 'none';
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollToTopButton = document.getElementById('scrollToTop');
+        const videoContainer = document.getElementById('videoContainer');
+        const welcome = document.getElementById("welcomeText");
+
+        // Scroll-to-top button
+        window.addEventListener('scroll', function () {
+            const scrollY = window.scrollY;
+
+            if (scrollY > 100) {
+                document.body.classList.add('scrolled');
+                scrollToTopButton.classList.add('show');
+                scrollToTopButton.classList.remove('hide');
+            } else {
+                document.body.classList.remove('scrolled');
+                scrollToTopButton.classList.add('hide');
+                setTimeout(() => {
+                    scrollToTopButton.classList.remove('show');
+                }, 300);
             }
 
-            // Close modal on outside click
-            window.addEventListener('click', function (e) {
-                const modal = document.getElementById('analysisModal');
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
+            scrollToTopButton.style.zIndex = '9999';
         });
-    </script>
 
-    <script src="yalla.js"></script>
+        scrollToTopButton.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Welcome text fade-out
+        setTimeout(() => {
+            if (welcome) {
+                welcome.classList.add("fade-out");
+                setTimeout(() => {
+                    welcome.style.display = "none";
+                }, 1000);
+            }
+        }, 3000);
+
+        // Open modal on 'Analysis' click
+        const analysisLink = document.querySelector('a[href="#Analysis"]');
+        if (analysisLink) {
+            analysisLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.getElementById('analysisModal').style.display = 'flex';
+            });
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function (e) {
+            const modal = document.getElementById('analysisModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+
+
+
+
+function analyzePart() {
+  const query = document.getElementById('partSearch').value;
+  if (!query) {
+    alert("Please enter a part or product name.");
+    return;
+  }
+
+  // Later: Integrate with your AI logic
+  alert(`Searching for "${query}"...`);
+}
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<script src="yalla.js"></script>
+
 </body>
 
 </html>
